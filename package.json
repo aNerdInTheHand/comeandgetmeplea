@@ -1,0 +1,45 @@
+{
+  "name": "comeandgetmeplea",
+  "version": "1.0.0",
+  "description": "Simple API Gateway and Lambda function to generate daft transfer rumours",
+  "main": "src/index.js",
+  "scripts": {
+    "linter": "standard",
+    "test": "nyc mocha --reporter dot",
+    "build": "mkdir -p dist && zip dist/comeandgetme.zip ./src/*",
+    "deploy": "aws s3 sync dist/ s3://comeandgetme"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aNerdInTheHand/comeandgetmeplea.git"
+  },
+  "keywords": [
+    "node",
+    "aws",
+    "lambda",
+    "apigateway"
+  ],
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.0.2",
+    "nyc": "^13.3.0",
+    "sinon": "^7.3.1",
+    "standard": "^12.0.1"
+  },
+  "standard": {
+    "env": [
+      "mocha"
+    ],
+    "globals": [
+      "assert",
+      "chai",
+      "expect"
+    ]
+  },
+  "author": "Nick Holvast",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aNerdInTheHand/comeandgetmeplea/issues"
+  },
+  "homepage": "https://github.com/aNerdInTheHand/comeandgetmeplea#readme"
+}
