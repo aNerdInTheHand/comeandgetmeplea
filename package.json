@@ -34,6 +34,9 @@
       "assert",
       "chai",
       "expect"
+    ],
+    "ignore": [
+      "/test/index.js"
     ]
   },
   "author": "Nick Holvast",
