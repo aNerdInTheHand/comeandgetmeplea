@@ -8,5 +8,6 @@ describe('index.handler', () => {
     index.handler(null, null, callbackSpy)
 
     sinon.assert.calledOnce(callbackSpy)
+    assert.equal(callbackSpy.args[0][1].statusCode, 200)
   })
 })

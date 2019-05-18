@@ -6,7 +6,7 @@
   "scripts": {
     "linter": "standard",
     "test": "nyc mocha --reporter dot",
-    "build": "mkdir -p dist && zip dist/comeandgetme.zip ./src/*",
+    "build": "mkdir -p dist && zip -r dist/comeandgetme.zip ./ -x \"*.git*\" -x \"*node_modules*\" -x \"*test*\" -x \"*.nyc_output*\"",
     "deploy": "aws s3 sync dist/ s3://comeandgetme"
   },
   "repository": {
