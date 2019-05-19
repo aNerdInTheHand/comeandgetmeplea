@@ -12,10 +12,14 @@ name: default
   BUCKET_OBJECT:
     from_secret: BUCKET_OBJECT
 
-  s3-publish:
-    image: plugins/s3
-    acl: private
-    region: eu-west-1
+steps:
+  name: s3-publish
+  image: plugins/s3
+  settings:
+    access_key:
+      from_secret: AWS_ACCESS_KEY_ID
+    secret_key:
+      from_secret: AWS_SECRET_ACCESS_KEY
     bucket:
       from_secret: BUCKET_NAME
     target:
