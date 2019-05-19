@@ -13,7 +13,7 @@ name: default
     from_secret: BUCKET_OBJECT
 
 steps:
-  name: s3-publish
+  - name: s3-publish
   image: plugins/s3
   settings:
     access_key:
