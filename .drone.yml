@@ -14,7 +14,7 @@ workspace: SPIKE
     eu-west-1
   BUCKET_NAME:
     from_secret: BUCKET_NAME
-  BUCKET_OBJECT
+  BUCKET_OBJECT:
     from_secret: BUCKET_OBJECT
 
 steps:
