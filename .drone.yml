@@ -16,14 +16,14 @@ name: default
     from_secret: BUCKET_OBJECT
 
 steps:
-  - name: deploy
+  - name: upload
     <<: *node-image
     environment:
       <<: *environment-variables
       WORKSPACE: feature
     commands:
       - apk add --no-cache --update \
-        python=2.7 \
+        python~=2.7 \
         py-pip && \
         pip install awscli --upgrade --user && \
         mv /root/.local/bin/* /usr/local/bin && \
