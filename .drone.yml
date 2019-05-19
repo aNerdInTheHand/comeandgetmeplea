@@ -23,7 +23,6 @@ steps:
       WORKSPACE: feature
     commands:
       - apk add --no-cache \
-        rsync \
         python \
         py-pip && \
         pip install awscli --upgrade --user && \
