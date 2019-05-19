@@ -1,6 +1,5 @@
 kind: pipeline
 name: default
-workspace: SPIKE
 
 .aws-cli: &aws-cli
   image: node:alpine:latest
@@ -22,6 +21,7 @@ steps:
     <<: *aws-cli
     environment:
       <<: *environment-variables
+      WORKSPACE: spike
     commands:
       - apk add --no-cache \
         rsync \
