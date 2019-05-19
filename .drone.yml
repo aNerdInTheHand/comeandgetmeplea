@@ -22,10 +22,4 @@ steps:
       <<: *environment-variables
       # WORKSPACE: spike
     commands:
-      - apk add --no-cache \
-        rsync \
-        python \
-        py-pip && \
-        pip install awscli --upgrade --user && \
-        mv /root/.local/bin/* /usr/local/bin && \
-        apk -v --purge del py-pip
+      - ls -la
