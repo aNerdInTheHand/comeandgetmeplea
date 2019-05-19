@@ -2,7 +2,7 @@ kind: pipeline
 name: default
 
 .node-image: &node-image
-  image: aws-cli:latest
+  image: node-aws-cli:latest
 
 .environment-variables: &environment-variables
   AWS_ACCESS_KEY_ID:
