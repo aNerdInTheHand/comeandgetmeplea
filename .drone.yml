@@ -19,5 +19,5 @@ name: default
     bucket:
       from_secret: BUCKET_NAME
     target:
-      from_secret:
+      from_secret: BUCKET_OBJECT
     source: dist/rumours-lambda.zip
