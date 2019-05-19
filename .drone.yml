@@ -1,8 +1,8 @@
 kind: pipeline
 name: default
 
-.aws-cli: &aws-cli
-  image: node:alpine:latest
+.node-image: &node-image
+  image: node:10-alpine
 
 .environment-variables: &environment-variables
   AWS_ACCESS_KEY_ID:
@@ -17,9 +17,9 @@ name: default
 
 steps:
   - name: deploy
-    <<: *aws-cli
+    <<: *node-image
     environment:
       <<: *environment-variables
-      # WORKSPACE: spike
+      WORKSPACE: feature
     commands:
       - ls -la
