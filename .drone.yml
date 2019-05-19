@@ -22,7 +22,7 @@ steps:
       <<: *environment-variables
       WORKSPACE: feature
     commands:
-      - apk add --no-cache \
+      - apk add --no-cache --update \
         python \
         py-pip && \
         pip install awscli --upgrade --user && \
