@@ -21,7 +21,7 @@ steps:
   - name: deploy
     <<: *aws-cli
     environment:
-      <<: *environment
+      <<: *environment-variables
     commands:
       - apk add --no-cache \
         rsync \
