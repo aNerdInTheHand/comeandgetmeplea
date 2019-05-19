@@ -9,8 +9,7 @@ name: default
     from_secret: AWS_ACCESS_KEY_ID
   AWS_SECRET_ACCESS_KEY:
     from_secret: AWS_SECRET_ACCESS_KEY
-  AWS_DEFAULT_REGION:
-    eu-west-1
+  AWS_DEFAULT_REGION: eu-west-1
   BUCKET_NAME:
     from_secret: BUCKET_NAME
   BUCKET_OBJECT:
@@ -21,7 +20,7 @@ steps:
     <<: *aws-cli
     environment:
       <<: *environment-variables
-      WORKSPACE: spike
+      # WORKSPACE: spike
     commands:
       - apk add --no-cache \
         rsync \
