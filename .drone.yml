@@ -2,7 +2,7 @@ kind: pipeline
 name: default
 
 .node-image: &node-image
-  image: node:10-alpine
+  image: node:alpine
 
 .environment-variables: &environment-variables
   AWS_ACCESS_KEY_ID:
