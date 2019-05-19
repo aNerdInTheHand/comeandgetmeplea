@@ -25,4 +25,4 @@ steps:
     region: eu-west-1
     target:
       from_secret: BUCKET_OBJECT
-    source: dist/rumours-lambda.zip
+    source: ./dist/rumours-lambda.zip
