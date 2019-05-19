@@ -2,7 +2,7 @@ kind: pipeline
 name: default
 
 .node-image: &node-image
-  image: alpine:latest
+  image: docker-aws-cli:latest
 
 .environment-variables: &environment-variables
   AWS_ACCESS_KEY_ID:
@@ -22,13 +22,7 @@ steps:
       <<: *environment-variables
       WORKSPACE: feature
     commands:
-      - apk add --no-cache --update \
-        python~=2.7 \
-        py-pip && \
-        pip install awscli --upgrade --user && \
-        mv /root/.local/bin/* /usr/local/bin && \
-        apk -v --purge del py-pip && \
-        mkdir -p dist && \
+      - mkdir -p dist && \
         zip -r dist/rumours-lambda.zip ./ \
         -x \"*.git*\" \
         -x \"*node_modules*\" \
