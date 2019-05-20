@@ -14,7 +14,7 @@ name: default
 
 steps:
 - name: code-zip
-  image: alpine:latest
+  image: node:latest
   volumes:
     - name: code
       path: /opt/code
