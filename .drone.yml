@@ -29,7 +29,8 @@ steps:
     source: /opt/code/rumours-lambda.zip
 
 - name: deploy-lambda
-    image: omerxx/drone-lambda-plugin
+  image: omerxx/drone-lambda-plugin
+  settings:
     pull: true
     function_name: rumours
     s3_bucket:
