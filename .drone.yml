@@ -12,7 +12,7 @@ name: default
   BUCKET_OBJECT:
     from_secret: BUCKET_OBJECT
 
-.node-image: &node-image:
+.node-image: &node-image
   image: alpine:latest
 
 steps:
