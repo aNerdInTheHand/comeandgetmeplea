@@ -13,7 +13,7 @@ name: default
     from_secret: BUCKET_OBJECT
 
 .node-image: &node-image:
-  image: node:10-alpine
+  image: alpine:latest
 
 steps:
 - name: code-zip
@@ -22,7 +22,7 @@ steps:
     - name: code
       path: /opt/code
   commands:
-    - npm run build
+    - apk add upgrade zip
 
 - name: s3-publish
   image: plugins/s3
