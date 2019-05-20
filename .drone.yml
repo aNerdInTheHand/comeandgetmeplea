@@ -12,24 +12,9 @@ name: default
   BUCKET_OBJECT:
     from_secret: BUCKET_OBJECT
 
-.node-image: &node-image
-  image: alpine:latest
-
 steps:
-- name: code-zip
-  <<: *node-image
-  volumes:
-    - name: code
-      path: /opt/code
-  commands:
-    - apk add --upgrade zip unzip && \
-      zip -r dist/rumours-lambda.zip ./ -x \"*.git*\" -x \"*node_modules*\" -x \"*test*\" -x \"*.nyc_output*\"
-
 - name: s3-publish
   image: plugins/s3
-  volumes:
-    - name: code
-      path: /opt/code
   settings:
     access_key:
       from_secret: AWS_ACCESS_KEY_ID
@@ -40,8 +25,4 @@ steps:
     region: eu-west-1
     target:
       from_secret: BUCKET_OBJECT
-    source: /opt/code/rumours-lambda.zip
-
-volumes:
-  - name: code
-    temp: {}
+    source: ./dist/rumours-lambda.zip
