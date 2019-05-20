@@ -22,7 +22,8 @@ steps:
     - name: code
       path: /opt/code
   commands:
-    - apk add --upgrade zip
+    - apk add --upgrade zip && \
+      zip -r dist/rumours-lambda.zip ./ -x \"*.git*\" -x \"*node_modules*\" -x \"*test*\" -x \"*.nyc_output*\"
 
 - name: s3-publish
   image: plugins/s3
