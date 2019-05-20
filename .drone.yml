@@ -14,12 +14,15 @@ name: default
 
 steps:
 - name: code-zip
-  image: alpine:latest
+  image: ubuntu:latest
   volumes:
     - name: code
       path: /opt/code
   commands:
-    - mkdir -p /opt/code && \
+    - apt-get update -y && \
+      apt-get upgrade -y && \
+      apt-get install -y zip && \
+      mkdir -p /opt/code && \
       zip -r /opt/code/rumours-lambda.zip ./ \
       -x \"*.git*\" \
       -x \"*node_modules*\" \
