@@ -26,7 +26,7 @@ steps:
     region: eu-west-1
     target:
       from_secret: BUCKET_OBJECT
-    source: /opt/code/rumours-lambda.zip
+    source: ./dist/rumours-lambda.zip
 
 - name: deploy-lambda
   image: omerxx/drone-lambda-plugin
