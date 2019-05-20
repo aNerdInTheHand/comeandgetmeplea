@@ -12,9 +12,12 @@ name: default
   BUCKET_OBJECT:
     from_secret: BUCKET_OBJECT
 
+.node-image: &node-image:
+  image: node:10-alpine
+
 steps:
 - name: code-zip
-  image: node:latest
+  <<: *node-image
   volumes:
     - name: code
       path: /opt/code
