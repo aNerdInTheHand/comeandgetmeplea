@@ -25,6 +25,12 @@ steps:
     region: eu-west-1
     target: rumours-lambda.zip
     source: /opt/code/rumours-lambda.zip
+  when:
+    branch:
+      include:
+        - master
+    event:
+      - push
 
 - name: deploy-lambda
   image: omerxx/drone-lambda-plugin
@@ -39,6 +45,12 @@ steps:
     function_name: rumours
     s3_bucket: rumours.football
     file_name: rumours-lambda.zip
+  when:
+    branch:
+      include:
+        - master
+    event:
+      - push
 
 volumes:
   - name: code
