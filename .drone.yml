@@ -29,12 +29,16 @@ steps:
 - name: deploy-lambda
   image: omerxx/drone-lambda-plugin
   settings:
+    access_key:
+      from_secret: AWS_ACCESS_KEY_ID
+    secret_key:
+      from_secret: AWS_SECRET_ACCESS_KEY
+    bucket: rumours.football
+    region: eu-west-1
     pull: true
     function_name: rumours
-    s3_bucket:
-      from_secret: BUCKET_NAME
-    file_name:
-      from_secret: BUCKET_OBJECT
+    s3_bucket: rumours.football
+    file_name: rumours-lambda.zip
 
 volumes:
   - name: code
