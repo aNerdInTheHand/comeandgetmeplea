@@ -4,12 +4,12 @@ name: default
 steps:
 - name: build
   image: python:2.7-alpine
-  # volumes:
-  #   - name: code
-  #     path: /opt/code
+  volumes:
+    - name: code
+      path: /opt/code
   commands:
     - apk update && apk add zip
-    - zip -r -9 rumours-lambda.zip *
+    - zip -r -9 /opt/code/rumours-lambda.zip *
 
 # - name: s3-publish
 #   image: plugins/s3
@@ -28,9 +28,9 @@ steps:
 
 - name: deploy-lambda
   image: mesosphere/aws-cli
-  # volumes:
-  #   - name: code
-  #     path: /opt/code
+  volumes:
+    - name: code
+      path: /opt/code
   environment:
     AWS_ACCESS_KEY_ID:
       from_secret: AWS_ACCESS_KEY_ID
@@ -42,4 +42,3 @@ steps:
 
 volumes:
   - name: code
-    temp: {}
