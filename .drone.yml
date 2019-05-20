@@ -1,38 +1,41 @@
-pipeline:
-  build:
-    image: python:2.7-alpine
-    volumes:
-      - name: code
-        path: /opt/code
-    commands:
-      - apk update && apk add zip
-      - zip -r -9 /opt/code/rumours-lambda.zip *
+kind: pipeline
+name: default
 
-  s3-publish:
-    image: plugins/s3
-    volumes:
-      - name: code
-        path: /opt/code
-    settings:
-      access_key:
-        from_secret: AWS_ACCESS_KEY_ID
-      secret_key:
-        from_secret: AWS_SECRET_ACCESS_KEY
-      bucket:
-        from_secret: BUCKET_NAME
-      region: eu-west-1
-      target:
-        from_secret: BUCKET_OBJECT
-      source: /opt/code/rumours-lambda.zip
+steps:
+- name: build
+  image: python:2.7-alpine
+  volumes:
+    - name: code
+      path: /opt/code
+  commands:
+    - apk update && apk add zip
+    - zip -r -9 /opt/code/rumours-lambda.zip *
 
-  deploy-lambda:
-      image: omerxx/drone-lambda-plugin
-      pull: true
-      function_name: rumours
-      s3_bucket:
-        from_secret: BUCKET_NAME
-      file_name:
-        from_secret: BUCKET_OBJECT
+- name: s3-publish
+  image: plugins/s3
+  volumes:
+    - name: code
+      path: /opt/code
+  settings:
+    access_key:
+      from_secret: AWS_ACCESS_KEY_ID
+    secret_key:
+      from_secret: AWS_SECRET_ACCESS_KEY
+    bucket:
+      from_secret: BUCKET_NAME
+    region: eu-west-1
+    target:
+      from_secret: BUCKET_OBJECT
+    source: /opt/code/rumours-lambda.zip
+
+- name: deploy-lambda
+    image: omerxx/drone-lambda-plugin
+    pull: true
+    function_name: rumours
+    s3_bucket:
+      from_secret: BUCKET_NAME
+    file_name:
+      from_secret: BUCKET_OBJECT
 
 volumes:
   - name: code
