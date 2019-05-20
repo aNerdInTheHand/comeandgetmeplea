@@ -14,13 +14,12 @@ name: default
 
 steps:
 - name: code-zip
-  image: alpine:latest
+  image: alpine
   volumes:
     - name: code
       path: /opt/code
   commands:
-    - apk add zip && \
-      zip -r /opt/code/rumours-lambda.zip ./ \
+    - zip -r /opt/code/rumours-lambda.zip ./ \
       -x \"*.git*\" \
       -x \"*node_modules*\" \
       -x \"*test*\" \
