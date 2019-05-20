@@ -11,34 +11,35 @@ steps:
     - apk update && apk add zip
     - zip -r -9 /opt/code/rumours-lambda.zip *
 
-# - name: s3-publish
-#   image: plugins/s3
-#   volumes:
-#     - name: code
-#       path: /opt/code
-#   settings:
-#     access_key:
-#       from_secret: AWS_ACCESS_KEY_ID
-#     secret_key:
-#       from_secret: AWS_SECRET_ACCESS_KEY
-#     bucket: rumours.football
-#     region: eu-west-1
-#     target: rumours-lambda.zip
-#     source: /opt/code/rumours-lambda.zip
-
-- name: deploy-lambda
-  image: mesosphere/aws-cli
+- name: s3-publish
+  image: plugins/s3
   volumes:
     - name: code
       path: /opt/code
-  environment:
-    AWS_ACCESS_KEY_ID:
+  settings:
+    access_key:
       from_secret: AWS_ACCESS_KEY_ID
-    AWS_SECRET_ACCESS_KEY:
+    secret_key:
       from_secret: AWS_SECRET_ACCESS_KEY
-    AWS_DEFAULT_REGION: eu-west-1
-  commands:
-    - aws lambda update-function-code --function-name rumours --zip-file fileb://rumours-handler.zip
+    bucket: rumours.football
+    region: eu-west-1
+    target: rumours-lambda.zip
+    source: /opt/code/rumours-lambda.zip
+
+- name: deploy-lambda
+  image: omerxx/drone-lambda-plugin
+  settings:
+    access_key:
+      from_secret: AWS_ACCESS_KEY_ID
+    secret_key:
+      from_secret: AWS_SECRET_ACCESS_KEY
+    bucket: rumours.football
+    region: eu-west-1
+    pull: true
+    function_name: rumours
+    s3_bucket: rumours.football
+    file_name: rumours-lambda.zip
 
 volumes:
   - name: code
+    temp: {}
