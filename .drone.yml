@@ -22,7 +22,7 @@ steps:
     - name: code
       path: /opt/code
   commands:
-    - apk add upgrade zip
+    - apk add --upgrade zip
 
 - name: s3-publish
   image: plugins/s3
