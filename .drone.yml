@@ -19,7 +19,7 @@ steps:
     - name: code
       path: /opt/code
   commands:
-    - apk-add zip && \
+    - apk add zip && \
       mkdir -p /opt/code && \
       zip -r /opt/code/rumours-lambda.zip ./ \
       -x \"*.git*\" \
