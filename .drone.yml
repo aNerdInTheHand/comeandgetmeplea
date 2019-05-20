@@ -21,11 +21,9 @@ steps:
       from_secret: AWS_ACCESS_KEY_ID
     secret_key:
       from_secret: AWS_SECRET_ACCESS_KEY
-    bucket:
-      from_secret: BUCKET_NAME
+    bucket: rumours.football
     region: eu-west-1
-    target:
-      from_secret: BUCKET_OBJECT
+    target: rumours-lambda.zip
     source: /opt/code/rumours-lambda.zip
 
 - name: deploy-lambda
