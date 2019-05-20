@@ -1,11 +1,12 @@
 const players = require('./players.json')
 const clubs = require('./clubs.json')
+const sources = require('./sources.json')
 const reasons = require('./reasons.json')
 
 const getArrayItem = arr => arr[Math.floor(Math.random() * arr.length)]
 
 exports.handler = (_, __, callback) => {
-  const result = `${getArrayItem(players)} has been rumoured to be on his way to ${getArrayItem(clubs)}. A source was quoted saying he ${getArrayItem(reasons)}.`
+  const result = `${getArrayItem(players)} has been rumoured to be on his way to ${getArrayItem(clubs)}. ${getArrayItem(sources)} ${getArrayItem(reasons)}.`
   const response = {
     'statusCode': 200,
     'headers': {
