@@ -9,7 +9,7 @@ steps:
       path: /dist
   commands:
     - apk update && apk add zip
-    - zip -r -9 /opt/code/rumours-lambda.zip *
+    - zip -r -9 /dist/rumours-lambda.zip *
 
 - name: s3-publish
   image: plugins/s3
