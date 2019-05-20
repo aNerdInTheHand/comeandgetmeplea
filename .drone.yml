@@ -38,7 +38,7 @@ steps:
       from_secret: AWS_SECRET_ACCESS_KEY
     AWS_DEFAULT_REGION: eu-west-1
   commands:
-    - aws lambda update-function-code --function-name rumours --zip-file /opt/code/rumours-handler.zip
+    - aws lambda update-function-code --function-name rumours --zip-file fileb://opt/code/rumours-handler.zip
 
 volumes:
   - name: code
