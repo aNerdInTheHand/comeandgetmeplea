@@ -39,9 +39,9 @@ steps:
     function_name: rumours
     s3_bucket: rumours.football
     file_name: rumours-lambda.zip
-  when:
-    branch:
-      include:
-        - master
-    event:
-      - push
+  # when:
+  #   branch:
+  #     include:
+  #       - master
+  #   event:
+  #     - push
