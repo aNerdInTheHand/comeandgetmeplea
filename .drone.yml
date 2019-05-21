@@ -24,7 +24,7 @@ steps:
     bucket: rumours.football
     region: eu-west-1
     target: /
-    source: /lambda/rumours-lambda.zip
+    source: rumours-lambda.zip
   # when:
   #   branch:
   #     include:
