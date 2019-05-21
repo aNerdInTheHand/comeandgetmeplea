@@ -6,16 +6,16 @@ steps:
   image: python:2.7-alpine
   volumes:
     - name: code
-      path: /
+      path: ./
   commands:
     - apk update && apk add zip
-    - zip -r -9 /rumours-lambda.zip *
+    - zip -r -9 ./rumours-lambda.zip *
 
 - name: s3-publish
   image: plugins/s3
   volumes:
     - name: code
-      path: /
+      path: ./
   settings:
     access_key:
       from_secret: AWS_ACCESS_KEY_ID
