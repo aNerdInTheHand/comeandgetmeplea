@@ -23,7 +23,7 @@ steps:
       from_secret: AWS_SECRET_ACCESS_KEY
     bucket: rumours.football
     region: eu-west-1
-    target: rumours-lambda.zip
+    target: /
     source: /lambda/rumours-lambda.zip
   # when:
   #   branch:
