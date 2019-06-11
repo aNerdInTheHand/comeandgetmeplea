@@ -29,10 +29,11 @@ steps:
 - name: deploy-lambda
   image: omerxx/drone-lambda-plugin
   settings:
-    access_key:
+    aws_access_key_id:
       from_secret: AWS_ACCESS_KEY_ID
-    secret_key:
+    aws_secret_access_key:
       from_secret: AWS_SECRET_ACCESS_KEY
+    aws_default-region: eu-west-1
     bucket: rumours.football
     region: eu-west-1
     pull: true
