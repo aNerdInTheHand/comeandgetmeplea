@@ -19,29 +19,35 @@ steps:
     region: eu-west-1
     target: /
     source: rumours-lambda.zip
-  when:
-    branch:
-      include:
-        - master
-    event:
-      - push
+  # when:
+  #   branch:
+  #     include:
+  #       - master
+  #   event:
+  #     - push
 
 - name: deploy-lambda
-  image: omerxx/drone-lambda-plugin
+  image: somedeveloper/aws-cli:latest
   settings:
     access_key:
       from_secret: AWS_ACCESS_KEY_ID
     secret_key:
       from_secret: AWS_SECRET_ACCESS_KEY
-    bucket: rumours.football
-    region: eu-west-1
-    pull: true
-    function_name: rumours
-    s3_bucket: rumours.football
-    file_name: rumours-lambda.zip
-  when:
-    branch:
-      include:
-        - master
-    event:
-      - push
+    commands:
+      - aws lambda update-function-code \
+        --s3-bucket rumours.football
+        --function-name rumours \
+        --zip-file rumours-lambda.zip \
+    # when:
+    #   branch:
+    #     include:
+    #       - master
+    #   event:
+    #     - push
+
+    # bucket: rumours.football
+    # region: eu-west-1
+    # pull: true
+    # function_name: rumours
+    # s3_bucket: rumours.football
+    # file_name: rumours-lambda.zip
