@@ -27,7 +27,7 @@ steps:
   #     - push
 
 - name: deploy-lambda
-  image: somedeveloper/aws-cli:latest
+  image: boycey/alpine-aws-cli:latest
   settings:
     access_key:
       from_secret: AWS_ACCESS_KEY_ID
