@@ -37,7 +37,7 @@ steps:
       - aws lambda update-function-code \
         --s3-bucket rumours.football \
         --function-name rumours \
-        --zip-file rumours-lambda.zip \
+        --zip-file rumours-lambda.zip
     # when:
     #   branch:
     #     include:
