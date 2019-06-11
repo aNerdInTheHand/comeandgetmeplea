@@ -8,23 +8,23 @@ steps:
     - apk update && apk add zip
     - zip -r -9 rumours-lambda.zip ./ -x \"*.git*\" -x \"*node_modules*\" -x \"*test*\" -x \"*.nyc_output*\"
 
-- name: s3-publish
-  image: plugins/s3
-  settings:
-    access_key:
-      from_secret: AWS_ACCESS_KEY_ID
-    secret_key:
-      from_secret: AWS_SECRET_ACCESS_KEY
-    bucket: rumours.football
-    region: eu-west-1
-    target: /
-    source: rumours-lambda.zip
-  when:
-    branch:
-      include:
-        - master
-    event:
-      - push
+# - name: s3-publish
+#   image: plugins/s3
+#   settings:
+#     access_key:
+#       from_secret: AWS_ACCESS_KEY_ID
+#     secret_key:
+#       from_secret: AWS_SECRET_ACCESS_KEY
+#     bucket: rumours.football
+#     region: eu-west-1
+#     target: /
+#     source: rumours-lambda.zip
+#   when:
+#     branch:
+#       include:
+#         - master
+#     event:
+#       - push
 
 - name: deploy-lambda
   image: omerxx/drone-lambda-plugin
@@ -40,9 +40,9 @@ steps:
     function_name: rumours
     s3_bucket: rumours.football
     file_name: rumours-lambda.zip
-  when:
-    branch:
-      include:
-        - master
-    event:
-      - push
+  # when:
+  #   branch:
+  #     include:
+  #       - master
+  #   event:
+  #     - push
