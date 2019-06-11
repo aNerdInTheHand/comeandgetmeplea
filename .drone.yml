@@ -3,9 +3,9 @@ name: default
 
 .deployment-variables: &deployment-variables
   AWS_ACCESS_KEY_ID:
-    from_secret: AWS_ACCESS_KEY_ID
+    from_secret: TEST_AWS_ACCESS_KEY_ID
   AWS_SECRET_ACCESS_KEY:
-    from_secret: AWS_SECRET_ACCESS_KEY
+    from_secret: TEST_AWS_SECRET_ACCESS_KEY
   AWS_DEFAULT_REGION: eu-west-1
 
 steps:
@@ -37,6 +37,7 @@ steps:
   image: boycey/alpine-aws-cli:latest
   <<: *deployment-variables
   commands:
+    - echo -e "[default]\nAWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID\nAWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" >> ~/.aws/credentials
     - aws lambda update-function-code --s3-bucket rumours.football --function-name rumours --s3-key rumours-lambda.zip --region eu-west-1
     # when:
     #   branch:
