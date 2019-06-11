@@ -46,8 +46,10 @@ steps:
     - export AWS_ACCES_KEY_ID=${AWS_ACCESS_KEY_ID}
     - export AWS_SECRET_ACCES_KEY=${AWS_SECRET_ACCESS_KEY}
     # - echo ${AWS_ACCESS_KEY_ID}
-    - echo -e "[default]\nAWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}\nAWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}" > ~/.aws/credentials
-    # - cat ~/.aws/credentials
+    - echo "[default]" > ~/.aws/credentials
+    - echo "AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}" >> ~/.aws/credentials
+    - echo "AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}" >> ~/.aws/credentials
+    - cat ~/.aws/credentials
     - aws lambda update-function-code --s3-bucket rumours.football --function-name rumours --s3-key rumours-lambda.zip --region eu-west-1
     # when:
     #   branch:
