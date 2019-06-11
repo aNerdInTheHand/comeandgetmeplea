@@ -8,17 +8,17 @@ steps:
     - apk update && apk add zip
     - zip -r -9 rumours-lambda.zip ./ -x \"*.git*\" -x \"*node_modules*\" -x \"*test*\" -x \"*.nyc_output*\"
 
-- name: s3-publish
-  image: plugins/s3
-  settings:
-    access_key:
-      from_secret: AWS_ACCESS_KEY_ID
-    secret_key:
-      from_secret: AWS_SECRET_ACCESS_KEY
-    bucket: rumours.football
-    region: eu-west-1
-    target: /
-    source: rumours-lambda.zip
+# - name: s3-publish
+#   image: plugins/s3
+#   settings:
+#     access_key:
+#       from_secret: AWS_ACCESS_KEY_ID
+#     secret_key:
+#       from_secret: AWS_SECRET_ACCESS_KEY
+#     bucket: rumours.football
+#     region: eu-west-1
+#     target: /
+#     source: rumours-lambda.zip
   # when:
   #   branch:
   #     include:
@@ -27,13 +27,17 @@ steps:
   #     - push
 
 - name: deploy-lambda
-  image: boycey/alpine-aws-cli:latest
+  image: alpine:latest
   settings:
     access_key:
       from_secret: AWS_ACCESS_KEY_ID
     secret_key:
       from_secret: AWS_SECRET_ACCESS_KEY
     commands:
+      - apk --no-cache update && \
+        apk --no-cache add bash  python py-pip py-setuptools ca-certificates curl groff less && \
+        pip --no-cache-dir install awscli && \
+        rm -rf /var/cache/apk/*
       - aws lambda update-function-code --s3-bucket rumours.football --function-name rumours --zip-file rumours-lambda.zip
     # when:
     #   branch:
