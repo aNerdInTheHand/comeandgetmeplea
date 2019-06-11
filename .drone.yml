@@ -1,6 +1,13 @@
 kind: pipeline
 name: default
 
+.deployment-variables: &deployment-variables
+  AWS_ACCESS_KEY_ID:
+    from_secret: AWS_ACCESS_KEY_ID
+  AWS_SECRET_ACCESS_KEY:
+    from_secret: AWS_SECRET_ACCESS_KEY
+  AWS_DEFAULT_REGION: eu-west-1
+
 steps:
 - name: build
   image: python:2.7-alpine
@@ -28,11 +35,7 @@ steps:
 
 - name: deploy-lambda
   image: boycey/alpine-aws-cli:latest
-  settings:
-    access_key:
-      from_secret: AWS_ACCESS_KEY_ID
-    secret_key:
-      from_secret: AWS_SECRET_ACCESS_KEY
+  <<: *deployment-variables
   commands:
     - aws lambda update-function-code --s3-bucket rumours.football --function-name rumours --s3-key rumours-lambda.zip --region eu-west-1
     # when:
