@@ -33,12 +33,8 @@ steps:
       from_secret: AWS_ACCESS_KEY_ID
     secret_key:
       from_secret: AWS_SECRET_ACCESS_KEY
-    commands:
-      - apk --no-cache update && \
-        apk --no-cache add bash  python py-pip py-setuptools ca-certificates curl groff less && \
-        pip --no-cache-dir install awscli && \
-        rm -rf /var/cache/apk/*
-      - aws lambda update-function-code --s3-bucket rumours.football --function-name rumours --zip-file rumours-lambda.zip
+  commands:
+    - aws lambda update-function-code --s3-bucket rumours.football --function-name rumours --zip-file rumours-lambda.zip
     # when:
     #   branch:
     #     include:
