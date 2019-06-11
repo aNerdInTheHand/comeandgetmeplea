@@ -36,6 +36,11 @@ steps:
 - name: deploy-lambda
   image: boycey/alpine-aws-cli:latest
   <<: *deployment-variables
+  environment:
+    AWS_ACCESS_KEY_ID:
+    from_secret: TEST_AWS_ACCESS_KEY_ID
+    AWS_SECRET_ACCESS_KEY:
+      from_secret: TEST_AWS_SECRET_ACCESS_KEY
   commands:
     - mkdir ~/.aws
     - echo $AWS_ACCESS_KEY_ID
