@@ -15,23 +15,23 @@ steps:
     - apk update && apk add zip
     - zip -r -9 rumours-lambda.zip ./ -x \"*.git*\" -x \"*node_modules*\" -x \"*test*\" -x \"*.nyc_output*\"
 
-# - name: s3-publish
-#   image: plugins/s3
-#   settings:
-#     access_key:
-#       from_secret: AWS_ACCESS_KEY_ID
-#     secret_key:
-#       from_secret: AWS_SECRET_ACCESS_KEY
-#     bucket: rumours.football
-#     region: eu-west-1
-#     target: /
-#     source: rumours-lambda.zip
-  # when:
-  #   branch:
-  #     include:
-  #       - master
-  #   event:
-  #     - push
+- name: s3-publish
+  image: plugins/s3
+  settings:
+    access_key:
+      from_secret: AWS_ACCESS_KEY_ID
+    secret_key:
+      from_secret: AWS_SECRET_ACCESS_KEY
+    bucket: rumours.football
+    region: eu-west-1
+    target: /
+    source: rumours-lambda.zip
+  when:
+    branch:
+      include:
+        - master
+    event:
+      - push
 
 - name: deploy-lambda
   image: boycey/alpine-aws-cli:latest
@@ -43,16 +43,11 @@ steps:
       from_secret: AWS_SECRET_ACCESS_KEY
   commands:
     - mkdir ~/.aws
-    # - export AWS_ACCES_KEY_ID=$$AWS_ACCESS_KEY_ID
-    # - export AWS_SECRET_ACCES_KEY=$$AWS_SECRET_ACCESS_KEY
     - echo -e "[default]\nAWS_ACCESS_KEY_ID=$$AWS_ACCESS_KEY_ID\nAWS_SECRET_ACCESS_KEY=$$AWS_SECRET_ACCESS_KEY" > ~/.aws/credentials
-    # - echo "AWS_ACCESS_KEY_ID=$$AWS_ACCESS_KEY_ID" >> ~/.aws/credentials
-    # - echo "AWS_SECRET_ACCESS_KEY=$$AWS_SECRET_ACCESS_KEY" >> ~/.aws/credentials
-    # - cat ~/.aws/credentials
     - aws lambda update-function-code --s3-bucket rumours.football --function-name rumours --s3-key rumours-lambda.zip --region eu-west-1
-    # when:
-    #   branch:
-    #     include:
-    #       - master
-    #   event:
-    #     - push
+    when:
+      branch:
+        include:
+          - master
+      event:
+        - push
