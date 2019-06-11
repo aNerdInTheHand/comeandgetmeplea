@@ -38,6 +38,7 @@ steps:
   <<: *deployment-variables
   commands:
     - mkdir ~/.aws
+    - echo $AWS_ACCESS_KEY_ID
     - echo -e "[default]\nAWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID\nAWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" > ~/.aws/credentials
     - cat ~/.aws/credentials
     # - aws lambda update-function-code --s3-bucket rumours.football --function-name rumours --s3-key rumours-lambda.zip --region eu-west-1
