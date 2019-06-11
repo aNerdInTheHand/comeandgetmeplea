@@ -43,6 +43,7 @@ steps:
       from_secret: TEST_AWS_SECRET_ACCESS_KEY
   commands:
     - mkdir ~/.aws
+    - export AWS_ACCES_KEY_ID=$AWS_ACCESS_KEY_ID
     - echo $AWS_ACCESS_KEY_ID
     - echo -e "[default]\nAWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID\nAWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" > ~/.aws/credentials
     - cat ~/.aws/credentials
