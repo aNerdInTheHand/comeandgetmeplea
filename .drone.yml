@@ -30,8 +30,8 @@ steps:
   #   branch:
   #     include:
   #       - master
-    event:
-      - push
+    # event:
+    #   - push
 
 - name: deploy-lambda
   image: quay.io/honestbee/awscli:1.11.55
@@ -49,5 +49,5 @@ steps:
   #   branch:
   #     include:
   #       - master
-    event:
-      - push
+    # event:
+    #   - push
