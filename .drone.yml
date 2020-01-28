@@ -26,10 +26,10 @@ steps:
     region: eu-west-1
     target: /
     source: rumours-lambda.zip
-  when:
-    branch:
-      include:
-        - master
+  # when:
+  #   branch:
+  #     include:
+  #       - master
     event:
       - push
 
@@ -45,9 +45,9 @@ steps:
     - mkdir ~/.aws
     - echo -e "[default]\nAWS_ACCESS_KEY_ID=$$AWS_ACCESS_KEY_ID\nAWS_SECRET_ACCESS_KEY=$$AWS_SECRET_ACCESS_KEY" > ~/.aws/credentials
     - aws lambda update-function-code --s3-bucket rumours.football --function-name rumours --s3-key rumours-lambda.zip --region eu-west-1
-  when:
-    branch:
-      include:
-        - master
+  # when:
+  #   branch:
+  #     include:
+  #       - master
     event:
       - push
