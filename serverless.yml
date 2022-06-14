@@ -12,6 +12,7 @@ provider:
         - Authorization
       allowedMethods:
         - GET
+        - OPTIONS
       exposedResponseHeaders:
         - Special-Response-Header
 
