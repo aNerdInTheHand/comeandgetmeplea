@@ -1,0 +1,19 @@
+provider:
+  httpApi:
+    cors:
+      allowedOrigins:
+        - https://nickholvast.com/*
+        - https://www.nickholvast.com/*
+      allowedHeaders:
+        - Content-Type
+        - Authorization
+      allowedMethods:
+        - GET
+      exposedResponseHeaders:
+        - Special-Response-Header
+
+functions:
+  comeAndGetMePlea:
+    handler: src/index.handler
+    events:
+      - httpApi: 'GET /'
