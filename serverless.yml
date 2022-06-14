@@ -1,3 +1,4 @@
+service: comeAndGetMePlea
 provider:
   name: aws
   httpApi:
