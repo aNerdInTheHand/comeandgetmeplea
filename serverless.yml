@@ -1,6 +1,7 @@
 service: comeAndGetMePlea
 provider:
   name: aws
+  region: eu-west-1
   httpApi:
     cors:
       allowedOrigins:
