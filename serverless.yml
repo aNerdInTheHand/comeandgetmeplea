@@ -1,0 +1,23 @@
+service: comeAndGetMePlea
+provider:
+  name: aws
+  region: eu-west-1
+  httpApi:
+    cors:
+      allowedOrigins:
+        - https://nickholvast.com
+        - https://www.nickholvast.com
+      allowedHeaders:
+        - Content-Type
+        - Authorization
+      allowedMethods:
+        - GET
+        - OPTIONS
+      exposedResponseHeaders:
+        - Special-Response-Header
+
+functions:
+  comeAndGetMePlea:
+    handler: src/index.handler
+    events:
+      - httpApi: 'GET /'
